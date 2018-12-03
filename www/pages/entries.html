@@ -1,0 +1,76 @@
+<form id="entries">
+    <div class="form-group">
+        <label>Label</label>
+        <input type="text" class="form-control" name="label" placeholder="Display title - No sensible information in here, label is not encrypted " required>
+    </div>
+    <div class="command-rows">
+        <div class="form-row template">
+            <div class="col-auto">
+                <select class="custom-select" data-name="type" required>
+                    <option selected value="">Type</option>
+                    <option value="1">Plain text</option>
+                    <option value="2">Command keys</option>
+                    <option value="3">Execute program</option>
+                    <option value="4">Wait</option>
+                </select>
+            </div>
+            <div class="col">
+                <input class="form-control" name="text" style="width: 100%" data-name="value" required>
+            </div>
+            <div class="col-auto">
+                <span class="btn btn-sm btn-danger remove-row">x</span>
+                <span class="btn btn-sm btn-success add-row">+</span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <small class="form-text text-muted">
+            <a href="#" class="commands text-info">Available command keys</a>
+        </small>
+    </div>
+    <span class="btn btn-primary submit">Save</span>
+</form>
+
+<style type="text/css">
+    .command-rows .add-row {
+        visibility: hidden;
+    }
+
+    .command-rows .form-row:last-child .add-row {
+        visibility: visible;
+    }
+
+    .command-rows .form-row .btn {
+        position: relative;
+        top: 3px;
+    }
+</style>
+
+<br/><br/>
+
+<h4>Existing commands</h4>
+<table class="table table-striped entries">
+    <thead>
+    <tr>
+        <th style="width:100%">Label</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<div id="myModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>

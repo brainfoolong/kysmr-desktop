@@ -1,0 +1,56 @@
+{
+  "name": "kysmrdesktop.nullix.at",
+  "version": "0.1.0",
+  "description": "Keyboard simulation on your desktop by using your fingerprint on your mobile device.",
+  "main": "scripts/main.js",
+  "scripts": {
+    "start": "electron . --dev",
+    "install": "yarn install",
+    "compile": "yarn compile",
+    "rebuild": "npm rebuild --runtime=electron --target=3.0.4 --disturl=https://atom.io/download/atom-shell --abi=59",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build-tools": "npm install --global windows-build-tools",
+    "build-tools-2015": "npm install --global --vs2015 windows-build-tools",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/brainfoolong/kysmr-desktop",
+  "author": "Roland Eigelsreiter (Brain Foo Long)",
+  "devDependencies": {
+    "electron": "^3.0.4",
+    "electron-builder": "^20.38.1",
+    "electron-rebuild": "^1.8.2"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "crypto-js": "^3.1.9-1",
+    "electron-reload": "^1.3.0",
+    "electron-store": "^2.0.0",
+    "ip": "^1.1.5",
+    "qrcode": "^1.3.2",
+    "querystring": "^0.2.0",
+    "robotjs": "^0.5.1"
+  },
+  "build": {
+    "appId": "kysmrdesktop.nullix.at",
+    "nodeGypRebuild": false,
+    "npmRebuild": false,
+    "npmArgs": " --runtime=electron --target=3.0.4 --disturl=https://atom.io/download/atom-shell --abi=59",
+    "productName": "kysmr",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "artifactName": "${productName}-${version}.${ext}",
+      "runAfterFinish": false
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
+    }
+  }
+}

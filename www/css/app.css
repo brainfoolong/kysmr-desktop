@@ -1,0 +1,176 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(../fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans Regular'), local('OpenSans-Regular'), url(../fonts/OpenSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(../fonts/OpenSans-Bold.ttf);
+}
+
+
+::placeholder {
+    font-size: 12px;
+    color: #999999 !important;
+}
+
+html::-webkit-scrollbar {
+    width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+    background: #ddd;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #666;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333333;
+    padding: 0;
+    margin: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#app {
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.titlebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 45px;
+    padding: 8px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px;
+}
+
+.titlebar .title {
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    width: calc(100% - 100px);
+    position: absolute;
+    left: 60px;
+    font-size: 20px;
+    font-weight: 300;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.titlebar .title small {
+    font-size: 11px;
+    color: #888888;
+}
+
+.titlebar .actions {
+    position: absolute;
+    right: 10px;
+    font-size: 20px;
+    color: #777777;
+    z-index: 1;
+}
+
+.titlebar .actions .action {
+    cursor: pointer;
+    transition: .2s;
+}
+
+.titlebar .actions .action:hover {
+    color: black;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 0 9px;
+}
+
+.sidebar .appicon {
+    position: absolute;
+    left: 13px;
+    top: 11px;
+    width: 24px;
+    height: 24px;
+    background: url(../img/appicon-colored.png) no-repeat;
+    background-size: contain;
+    transition: 0.2s;
+}
+
+.sidebar .appicon:hover {
+    left: 0;
+    width: 48px;
+    height: 48px;
+    top: 0;
+}
+
+.sidebar .icons {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    color: #888888;
+}
+
+.sidebar .icons .icon {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+    height: 40px;
+    font-size: 18px;
+}
+
+.sidebar .icons .icon:link {
+    font-size: 24px;
+    color: #888888;
+}
+
+.sidebar .icons .icon:active,
+.sidebar .icons .icon:hover,
+.sidebar .icons .icon.current-page {
+    color: #ff004a;
+    font-size: 24px;
+}
+
+#page {
+    padding: 15px;
+    padding-top: 60px;
+    padding-left: 60px;
+}
+
+.parsley-errors-list {
+    list-style-type: none;
+    color: red;
+    display: none;
+    padding: 0;
+    margin: 0;
+}
+
+.parsley-errors-list.filled {
+    display: initial;
+}
