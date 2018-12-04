@@ -12,9 +12,10 @@ App.pages['settings'].load = function () {
     Storage.set('config', $.extend({}, config, formData))
     App.toast('Config changed - You should restart this application', 'success')
 
-    let AutoLaunch = require('auto-launch')
+    let AutoLaunch = require(__dirname + '/../scripts/autolaunch')
     let autoLauncher = new AutoLaunch({
-      name: 'kysmr'
+      'name': 'kysmr',
+      'args': '--nowindow'
     })
     if (formData.autostart) {
       autoLauncher.enable()

@@ -49,26 +49,6 @@ function serverStart () {
   })
 }
 
-function quit () {
-  setTimeout(function () {
-    app.quit()
-  }, 1000)
-  if (mainWindow) {
-    mainWindow.destroy()
-  }
-  if (tray) {
-    tray.destroy()
-  }
-  try {
-    if (server) {
-      server.close(() => {})
-      setImmediate(function () {server.emit('close')})
-    }
-  } catch (e) {
-
-  }
-}
-
 function serverResponse (request, response) {
   if (request.method === 'POST') {
     let body = ''
@@ -127,39 +107,39 @@ function serverResponse (request, response) {
   }
 }
 
-function ready () {
-  function openWindow () {
-    if (!mainWindow) {
-      mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
-        backgroundColor: '#ffffff',
-        show: true,
-        icon: __dirname + '/../www/img/appicon-white.ico',
-        frame: false
-      })
-      mainWindow.setMenu(null)
-      mainWindow.on('minimize', function (event) {
+function openWindow () {
+  if (!mainWindow) {
+    mainWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      backgroundColor: '#ffffff',
+      show: true,
+      icon: __dirname + '/../www/img/appicon-white.ico',
+      frame: false
+    })
+    mainWindow.setMenu(null)
+    mainWindow.on('minimize', function (event) {
+      event.preventDefault()
+      mainWindow.hide()
+    })
+    mainWindow.on('close', function (event) {
+      if (!app.isQuiting) {
         event.preventDefault()
         mainWindow.hide()
-      })
-      mainWindow.on('close', function (event) {
-        if (!app.isQuiting) {
-          event.preventDefault()
-          mainWindow.hide()
-        }
-        return false
-      })
-      mainWindow.loadFile('www/index.html')
-      mainWindow.webContents.on('new-window', function (event, url) {
-        event.preventDefault()
-        require('electron').shell.openExternal(url)
-      })
-    } else {
-      mainWindow.show()
-    }
+      }
+      return false
+    })
+    mainWindow.loadFile('www/index.html')
+    mainWindow.webContents.on('new-window', function (event, url) {
+      event.preventDefault()
+      require('electron').shell.openExternal(url)
+    })
+  } else {
+    mainWindow.show()
   }
+}
 
+function ready () {
   let contextMenu = Menu.buildFromTemplate([
     {label: 'Open Interface', click: openWindow},
     {label: 'Quit', click: quit}
@@ -171,15 +151,30 @@ function ready () {
 
   serverStart()
 
-  if (!cliargs.get('nowindow')) {
+  if (!cliargs.get('--nowindow')) {
     openWindow()
   }
 }
 
-app.on('ready', ready)
-
-app.on('activate', function () {
-  if (mainWindow === null) {
-    ready()
+function quit () {
+  setTimeout(function () {
+    app.quit()
+  }, 1000)
+  if (mainWindow) {
+    mainWindow.destroy()
   }
-})
+  if (tray) {
+    tray.destroy()
+  }
+  try {
+    if (server) {
+      server.close(() => {})
+      setImmediate(function () {server.emit('close')})
+    }
+  } catch (e) {
+
+  }
+}
+
+app.on('ready', ready)
+app.on('second-instance', openWindow)
